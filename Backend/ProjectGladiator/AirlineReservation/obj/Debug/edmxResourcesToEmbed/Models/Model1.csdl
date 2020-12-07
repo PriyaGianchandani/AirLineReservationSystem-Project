@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FRSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlightID" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="SeatID" Type="Int32" Nullable="false" />
+    <Property Name="BookingDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="NoofTickets" Type="Int32" Nullable="false" />
+    <Property Name="BookingAmount" Type="Int32" Nullable="false" />
+    <Property Name="DateOfDeparture" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ReturnDate" Type="DateTime" Precision="0" />
+    <Property Name="ReturnTicket" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Class" Relationship="Self.FK__Booking__ClassID__24927208" FromRole="Booking" ToRole="Class" />
+    <NavigationProperty Name="RegisteredUser" Relationship="Self.FK__Booking__Email__239E4DCF" FromRole="Booking" ToRole="RegisteredUsers" />
+    <NavigationProperty Name="Flight" Relationship="Self.FK__Booking__FlightI__22AA2996" FromRole="Booking" ToRole="Flight" />
+    <NavigationProperty Name="Seat" Relationship="Self.FK__Booking__SeatID__25869641" FromRole="Booking" ToRole="Seat" />
+    <NavigationProperty Name="Cancellations" Relationship="Self.FK__Cancellat__Booki__2D27B809" FromRole="Booking" ToRole="Cancellations" />
+    <NavigationProperty Name="Passengers" Relationship="Self.FK__Passenger__Booki__286302EC" FromRole="Booking" ToRole="Passengers" />
+  </EntityType>
+  <EntityType Name="Cancellation">
+    <Key>
+      <PropertyRef Name="CancellationID" />
+    </Key>
+    <Property Name="CancellationID" Type="Int32" Nullable="false" />
+    <Property Name="CancellationDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="FlightID" Type="Int32" Nullable="false" />
+    <Property Name="RefundAmount" Type="Int32" Nullable="false" />
+    <Property Name="BookingID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Booking" Relationship="Self.FK__Cancellat__Booki__2D27B809" FromRole="Cancellations" ToRole="Booking" />
+    <NavigationProperty Name="Flight" Relationship="Self.FK__Cancellat__Fligh__2C3393D0" FromRole="Cancellations" ToRole="Flight" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <Property Name="FlightID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__ClassID__24927208" FromRole="Class" ToRole="Booking" />
+    <NavigationProperty Name="Flight" Relationship="Self.FK__Class__FlightID__1BFD2C07" FromRole="Class" ToRole="Flight" />
+    <NavigationProperty Name="Seats" Relationship="Self.FK__Seat__ClassID__1FCDBCEB" FromRole="Class" ToRole="Seat" />
+    <Property Name="BusinessCost" Type="Int32" Nullable="false" />
+    <Property Name="NoOfBusinessSeats" Type="Int32" Nullable="false" />
+    <Property Name="EconomyCost" Type="Int32" Nullable="false" />
+    <Property Name="NoOfEconomySeats" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="FlightID" />
+    </Key>
+    <Property Name="FlightID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SourceFlight" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ArrivalTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="NoOfSeats" Type="Int32" Nullable="false" />
+    <Property Name="FlightDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__FlightI__22AA2996" FromRole="Flight" ToRole="Booking" />
+    <NavigationProperty Name="Cancellations" Relationship="Self.FK__Cancellat__Fligh__2C3393D0" FromRole="Flight" ToRole="Cancellations" />
+    <NavigationProperty Name="Classes" Relationship="Self.FK__Class__FlightID__1BFD2C07" FromRole="Flight" ToRole="Class" />
+    <NavigationProperty Name="Seats" Relationship="Self.FK__Seat__FlightID__1ED998B2" FromRole="Flight" ToRole="Seat" />
+    <Property Name="Del" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Passenger">
+    <Key>
+      <PropertyRef Name="PassengerID" />
+    </Key>
+    <Property Name="PassengerID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Age" Type="Int32" Nullable="false" />
+    <Property Name="BookingID" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Booking" Relationship="Self.FK__Passenger__Booki__286302EC" FromRole="Passengers" ToRole="Booking" />
+    <NavigationProperty Name="RegisteredUser" Relationship="Self.FK__Passenger__Email__29572725" FromRole="Passengers" ToRole="RegisteredUsers" />
+  </EntityType>
+  <EntityType Name="RegisteredUser">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__Email__239E4DCF" FromRole="RegisteredUsers" ToRole="Booking" />
+    <NavigationProperty Name="Passengers" Relationship="Self.FK__Passenger__Email__29572725" FromRole="RegisteredUsers" ToRole="Passengers" />
+  </EntityType>
+  <EntityType Name="Seat">
+    <Key>
+      <PropertyRef Name="SeatID" />
+    </Key>
+    <Property Name="SeatID" Type="Int32" Nullable="false" />
+    <Property Name="FlightID" Type="Int32" Nullable="false" />
+    <Property Name="ClassID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bookings" Relationship="Self.FK__Booking__SeatID__25869641" FromRole="Seat" ToRole="Booking" />
+    <NavigationProperty Name="Class" Relationship="Self.FK__Seat__ClassID__1FCDBCEB" FromRole="Seat" ToRole="Class" />
+    <NavigationProperty Name="Flight" Relationship="Self.FK__Seat__FlightID__1ED998B2" FromRole="Seat" ToRole="Flight" />
+  </EntityType>
+  <Association Name="FK__Booking__ClassID__24927208">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__Email__239E4DCF">
+    <End Role="RegisteredUsers" Type="Self.RegisteredUser" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisteredUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__FlightI__22AA2996">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__SeatID__25869641">
+    <End Role="Seat" Type="Self.Seat" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Seat">
+        <PropertyRef Name="SeatID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="SeatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cancellat__Booki__2D27B809">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Cancellations" Type="Self.Cancellation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Cancellations">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Passenger__Booki__286302EC">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Passengers" Type="Self.Passenger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Passengers">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cancellat__Fligh__2C3393D0">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Cancellations" Type="Self.Cancellation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Cancellations">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Class__FlightID__1BFD2C07">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Seat__ClassID__1FCDBCEB">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Seat">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Seat__FlightID__1ED998B2">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Seat" Type="Self.Seat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Seat">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Passenger__Email__29572725">
+    <End Role="RegisteredUsers" Type="Self.RegisteredUser" Multiplicity="1" />
+    <End Role="Passengers" Type="Self.Passenger" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisteredUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Passengers">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FRSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bookings" EntityType="Self.Booking" />
+    <EntitySet Name="Cancellations" EntityType="Self.Cancellation" />
+    <EntitySet Name="Classes" EntityType="Self.Class" />
+    <EntitySet Name="Flights" EntityType="Self.Flight" />
+    <EntitySet Name="Passengers" EntityType="Self.Passenger" />
+    <EntitySet Name="RegisteredUsers" EntityType="Self.RegisteredUser" />
+    <EntitySet Name="Seats" EntityType="Self.Seat" />
+    <AssociationSet Name="FK__Booking__ClassID__24927208" Association="Self.FK__Booking__ClassID__24927208">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__Email__239E4DCF" Association="Self.FK__Booking__Email__239E4DCF">
+      <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__FlightI__22AA2996" Association="Self.FK__Booking__FlightI__22AA2996">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__SeatID__25869641" Association="Self.FK__Booking__SeatID__25869641">
+      <End Role="Seat" EntitySet="Seats" />
+      <End Role="Booking" EntitySet="Bookings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cancellat__Booki__2D27B809" Association="Self.FK__Cancellat__Booki__2D27B809">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="Cancellations" EntitySet="Cancellations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Passenger__Booki__286302EC" Association="Self.FK__Passenger__Booki__286302EC">
+      <End Role="Booking" EntitySet="Bookings" />
+      <End Role="Passengers" EntitySet="Passengers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cancellat__Fligh__2C3393D0" Association="Self.FK__Cancellat__Fligh__2C3393D0">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Cancellations" EntitySet="Cancellations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Class__FlightID__1BFD2C07" Association="Self.FK__Class__FlightID__1BFD2C07">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Class" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Seat__ClassID__1FCDBCEB" Association="Self.FK__Seat__ClassID__1FCDBCEB">
+      <End Role="Class" EntitySet="Classes" />
+      <End Role="Seat" EntitySet="Seats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Seat__FlightID__1ED998B2" Association="Self.FK__Seat__FlightID__1ED998B2">
+      <End Role="Flight" EntitySet="Flights" />
+      <End Role="Seat" EntitySet="Seats" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Passenger__Email__29572725" Association="Self.FK__Passenger__Email__29572725">
+      <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+      <End Role="Passengers" EntitySet="Passengers" />
+    </AssociationSet>
+    <FunctionImport Name="proc_searchflight" ReturnType="Collection(FRSModel.proc_searchflight_Result)">
+      <Parameter Name="SourceFlight" Mode="In" Type="String" />
+      <Parameter Name="Destination" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="proc_searchflight_Result">
+    <Property Type="Int32" Name="FlightID" Nullable="false" />
+    <Property Type="String" Name="SourceFlight" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Destination" Nullable="false" MaxLength="50" />
+    <Property Type="Time" Name="ArrivalTime" Nullable="false" />
+    <Property Type="Time" Name="DepartureTime" Nullable="false" />
+    <Property Type="Int32" Name="NoOfSeats" Nullable="false" />
+    <Property Type="DateTime" Name="FlightDate" Nullable="false" />
+    <Property Type="Int32" Name="Duration" Nullable="false" />
+  </ComplexType>
+</Schema>
