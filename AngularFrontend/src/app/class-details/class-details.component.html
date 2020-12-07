@@ -1,0 +1,123 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+    <div class="container">
+        <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active">Home</a>
+                <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                <a href="#" class="nav-item nav-link">View Booking Details</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+               <!-- <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+                <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+            </div>
+        </div>
+    </div>    
+</nav>
+<div class="container">
+    <div class="jumbotron">
+        <div class="display-4">
+            Class Details
+        </div>
+        <form [formGroup]="ClassForm" (ngSubmit)= "onFormSubmit()" >
+            <div class="form-group">
+                <label for="ClassID">
+                    Enter ClassID
+                </label>
+                <input type="text" class="form-control" formControlName="ClassID" required>
+
+                <div class="alert alert-danger" *ngIf="ClassID.errors && ClassID.touched">
+                    <small *ngIf="ClassID.errors.required">
+                        ClassID is required
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="NoOfClassSeats">FlightID</label>
+                <select formControlName="FlightID" class="form-control">
+                   
+                    <option>Choose FlightID</option>
+                    <option *ngFor="let f of flightdetails">{{f.FlightID}}</option>
+                </select>    
+            </div>
+           <!-- <div class="form-group">
+                <label for="Business">Business</label>
+                <input type="text" class="form-control" formControlName="Business">
+
+                <div class="alert alert-danger" *ngIf="Business.errors && Business.touched">
+                    <small *ngIf="Business.errors.required">
+                        Business is required
+                    </small>
+                    
+                </div>
+            </div>-->
+
+            <div class="form-group">
+                <label for="BusinessCost">Business Cost</label>
+                <input type="text" class="form-control" formControlName="BusinessCost">
+
+                <div class="alert alert-danger" *ngIf="BusinessCost.errors && BusinessCost.touched">
+                    <small *ngIf="BusinessCost.errors.required">
+                        Business Cost is required
+                    </small>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="NoOfBusinessSeats" #NoOfBusinessSeats >Enter No Of Business Seats</label>
+                <input type="text" class="form-control" formControlName="NoOfBusinessSeats">
+
+                <div class="alert alert-danger" *ngIf="NoOfBusinessSeats.errors && NoOfBusinessSeats.touched">
+                    <small *ngIf="NoOfBusinessSeats.errors.required">
+                        NoOfSeats is required
+                    </small>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="EconomyCost">Economy Cost</label>
+                <input type="text" class="form-control" formControlName="EconomyCost">
+
+                <div class="alert alert-danger" *ngIf="EconomyCost.errors && EconomyCost.touched">
+                    <small *ngIf="EconomyCost.errors.required">
+                        Economy Cost is required
+                    </small>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="NoOfEconomySeats">Enter No Of Economy Seats</label>
+                <input type="text" class="form-control" formControlName="NoOfEconomySeats" #NoOfEconomySeats>
+
+                <div class="alert alert-danger" *ngIf="NoOfEconomySeats.errors && NoOfEconomySeats.touched">
+                    <small *ngIf="NoOfEconomySeats.errors.required">
+                        No Of Economy Seats is required
+                    </small>
+                    
+                </div>
+            </div>
+
+            <h1>Number of seats is {{NoOfSeatss}}</h1>
+
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+            </div>
+
+            <div class="text-danger">{{err}}</div>
+        </form>
+    </div>
+</div>

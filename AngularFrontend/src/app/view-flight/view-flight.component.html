@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+    <div class="container">
+        <a href="#" class="navbar-brand mr-3" routerLink="/admin-home">Flight Reservation</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active" routerLink="/admin-home">Home</a>
+                <!--<a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                <a href="#" class="nav-item nav-link">View Booking Details</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>-->
+                <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+                <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+            </div>
+        </div>
+    </div>    
+</nav>
+<table border="1">
+    <tr>
+        <th>FlightID</th>
+        <th>SourceFlight</th>
+        <th> Destination</th>
+        <th>ArrivalTime</th>
+        <th>DepartureTime</th>
+        <th>NoOfSeats</th>
+        <th>FlightDate</th>
+        <th>Duration</th>
+
+    </tr>
+
+    <tr *ngFor="let f of flightdetails">
+        <td>{{f.FlightID}}</td>
+        <td>{{f.SourceFlight}}</td>
+        <td>{{f.Destination}}</td>
+        <td>{{f.ArrivalTime}}</td>
+        <td>{{f.DepartureTime}}</td>
+        <td>{{f.NoOfSeats}}</td>
+        <td>{{f.FlightDate}}</td>
+        <td>{{f.Duration}}</td>
+        
+    </tr>
+
+</table>

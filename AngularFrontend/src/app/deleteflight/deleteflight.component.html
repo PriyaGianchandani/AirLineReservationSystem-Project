@@ -1,0 +1,30 @@
+<div class="card-footer">  
+    <div class="col-lg-12 table-responsive">  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>FlightId</th>  
+                    <th>Source</th>  
+                    <th>Destination</th>  
+                    <th>DepartureTime</th>  
+                    <th>ArrivalTime</th> 
+                    <th>FlightDate</th>  
+                    <th></th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr *ngFor="let f of allFlights">  
+                    <td>{{f.FlightID}}</td>  
+                    <td>{{f.SourceFlight}}</td>  
+                    <td>{{f.Destination}}</td>  
+                    <td>{{f.DepartureTime}}</td>  
+                    <td>{{f.ArrivalTime}}</td>
+                    <td>{{f.FlightDate}}</td>  
+                    <td>  
+                        <button type="button" class="btn btn-danger mr-1" (click)="DeleteStudent(f.FlightID)">Delete</button>  
+                    </td>  
+                </tr>  
+            </tbody>  
+        </table>  
+    </div>  
+</div>   

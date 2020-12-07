@@ -1,0 +1,120 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<header>
+</header>
+<main>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+        <div class="container">
+            <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                    <a href="#" class="nav-item nav-link">View Booking Details</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+                    <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>-->
+                </div>
+                <div class="navbar-nav ml-auto">
+                    <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+                </div>
+            </div>
+        </div>    
+    </nav>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="display-4">
+                Add Passenger Details
+            </div>
+            <form [formGroup]="PassengerForm" (ngSubmit)= "onFormSubmit()" >
+                <div class="form-group">
+                    <label for="PassengerID">
+                        Enter PassengerID
+                    </label>
+                    <input type="text" class="form-control" formControlName="PassengerID" required>
+    
+                    <div class="alert alert-danger" *ngIf="PassengerID.errors && PassengerID.touched">
+                        <small *ngIf="PassengerID.errors.required">
+                            PassengerID is required
+                        </small>
+                    </div>
+                </div>
+    
+    
+                <div class="form-group">
+                    <label for="FirstName">FirstName</label>
+                    <input type="text" class="form-control" formControlName="FirstName">
+    
+                    <div class="alert alert-danger" *ngIf="FirstName.errors && FirstName.touched">
+                        <small *ngIf="FirstName.errors.required">
+                            First Name is required
+                        </small>
+                        
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="LastName">LastName</label>
+                    <input type="text" class="form-control" formControlName="LastName">
+    
+                    <div class="alert alert-danger" *ngIf="LastName.errors && LastName.touched">
+                        <small *ngIf="LastName.errors.required">
+                            LastName is required
+                        </small>
+                        
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="Age">Age</label>
+                    <input type="text" class="form-control" formControlName="Age">
+    
+                    <div class="alert alert-danger" *ngIf="Age.errors && Age.touched">
+                        <small *ngIf="Age.errors.required">
+                           Age is required
+                        </small>
+                        
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="BookingID">Enter Booking ID</label>
+                    <input type="text" class="form-control" formControlName="BookingID" >
+    
+                    <div class="alert alert-danger" *ngIf="BookingID.errors && BookingID.touched">
+                        <small *ngIf="BookingID.errors.required">
+                            BookingID is required
+                        </small>
+                        
+                    </div>
+                </div>
+
+                <div class="input-group mb-4">  
+                    <input type="text" class="form-control" placeholder="Email"  formControlName="Email" required>
+                      <div class="alert alert-danger" *ngIf="Email.errors && Email.touched">
+                        <small *ngIf="Email.errors.required">
+                          Email ID is required
+                        </small>
+                        <small *ngIf="Email.errors.pattern">
+                          Email should be in Correct format
+                        </small>
+                      </div>   
+                  </div>
+    
+    
+    
+    
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;
+                </div>
+    
+                <div class="text-danger">{{err}}</div>
+            </form>
+        </div>
+    </div>
