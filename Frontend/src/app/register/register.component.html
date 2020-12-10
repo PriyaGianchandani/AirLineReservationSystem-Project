@@ -1,0 +1,127 @@
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+  <div class="container" style="max-width: 100%; margin: 0;">
+      <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+              <a href="#" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+              <a class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+              <!--<a href="#" class="nav-item nav-link">View Booking Details</a>-->
+              <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+             <!-- <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+          </div>
+      </div>
+  </div>    
+</nav>
+<div class="container">
+    <div class="jumbotron">
+      <div class="display-4" style="text-align: center;" >
+        Register
+      </div><br>
+      
+      <form [formGroup]="UserForm" (ngSubmit)= "onFormSubmit()">  
+        <div class="input-group mb-3">      
+          <input type="text" class="form-control" placeholder="Title"  formControlName="Title" required>
+            <div class="alert alert-danger" *ngIf="Title.errors && Title.touched">
+              <small *ngIf="Title.errors.required">
+                Title is required
+              </small> 
+            </div>
+        </div>    
+        <div class="input-group mb-3">      
+          <input type="text" class="form-control" placeholder="First Name"  formControlName="FirstName" required>
+            <div class="alert alert-danger" *ngIf="Firstname.errors && Firstname.touched">
+              <small *ngIf="Firstname.errors.required">
+                First Name is required
+              </small>
+              <small  *ngIf="Firstname.errors.pattern">
+                FirstName can contain only Alphabets!!
+              </small>
+
+            </div>
+        </div>  
+        <div class="input-group mb-3">  
+          <input type="text" class="form-control" placeholder="Last Name"  formControlName="LastName" required>  
+            <div class="alert alert-danger" *ngIf="Lastname.errors && Lastname.touched">
+              <small *ngIf="Lastname.errors.required">
+                Last Name is required
+              </small>
+              <small  *ngIf="Lastname.errors.pattern">
+                LastName can contain only Alphabets!!
+              </small>
+              
+            </div> 
+        </div>
+        <div class="input-group mb-3">  
+          <input type="password" class="form-control" placeholder="Password"  formControlName="Password" required>  
+            <div class="alert alert-danger" *ngIf="Password.errors && Password.touched">
+              <small *ngIf="Password.errors.required">
+                Password is required!!!
+              </small>
+              <small *ngIf="Password.errors.minlength">
+                Password should be atleast of length 8 and maximum of length 16!!
+              </small>
+              <small *ngIf="Password.errors.pattern">
+                Please enter a valid password!!
+              </small>
+            </div> 
+        </div>
+        
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Confirm Password" formControlName="ConfirmPassword">
+          <div class="alert alert-danger" *ngIf="ConfirmPassword.touched && ConfirmPassword.invalid">
+            <small *ngIf="ConfirmPassword.errors.required">
+              Password is required.
+            </small>
+            <small *ngIf="ConfirmPassword.errors.confirmedValidator">
+              Password and Confirm Password must match.
+            </small>
+          </div>
+        </div>
+        
+        <div class="input-group mb-4">  
+          <input type="text" class="form-control" placeholder="Email"  formControlName="Email" required>
+            <div class="alert alert-danger" *ngIf="Email.errors && Email.touched">
+              <small *ngIf="Email.errors.required">
+                Email ID is required
+              </small>
+              <small *ngIf="Email.errors.pattern">
+                Email should be in Correct format
+              </small>
+            </div>   
+        </div>
+        <div class="input-group mb-4">  
+          <input type="date" name="Date of Birth" data-placeholder="Date of birth" class="form-control" formControlName="Dob" required><br>
+            <div class="alert alert-danger" *ngIf="Dob.errors && Dob.touched">
+              <small *ngIf="Dob.errors.required">
+                Date of Birth is required
+              </small>  
+            </div>
+        </div>
+        <div class="input-group mb-4">  
+          <input type="text" class="form-control" placeholder="Contact No"  formControlName="ContactNo" required>
+            <div class="alert alert-danger" *ngIf="ContactNo.errors && ContactNo.touched">
+              <small *ngIf="ContactNo.errors.required">
+                Contact Number is required
+              </small>
+              <small *ngIf="ContactNo.errors.pattern">
+                Please enter a valid Phone number!!!
+              </small>
+            </div>   
+        </div>   
+          <button type="submit" class="btn btn-success"  [disabled] = "UserForm.invalid">Register</button>
+          <button class="btn btn-danger" type="submit">Reset</button> 
+          {{err}} 
+      </form>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+    <nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+        <div class="container" style="max-width: 100%; margin: 0;">
+            <a href="#" class="navbar-brand mr-3" routerLink="/admin-home">Flight Reservation</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link active" routerLink="/admin-home">Home</a>
+                    <!--<a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                    <a href="#" class="nav-item nav-link">View Booking Details</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>-->
+                    <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/deleteflight">Delete Flight</a>
+                </div>
+                <div class="navbar-nav ml-auto">
+                    <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+                </div>
+            </div>
+        </div>    
+    </nav>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="display-4">
+                Add Flight
+            </div>
+            <hr class="my-4">
+            <form [formGroup]="AddFlightForm" (ngSubmit)= "onFormSubmit(); AddFlightForm.reset()">
+             
+                <div class="form-group">
+                    <label for="SouceFlight">
+                        Source 
+                    </label>
+                    <input type="text" class="form-control" formControlName="SourceFlight" required>
+    
+                    <div class="alert alert-danger" *ngIf="SourceFlight.errors && SourceFlight.touched">
+                        <small *ngIf="SourceFlight.errors.required">
+                            Source is required
+                        </small>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="Destination">
+                        To
+                    </label>
+                    <input type="text" class="form-control" formControlName="Destination" required>
+    
+                    <div class="alert alert-danger" *ngIf="Destination.errors && Destination.touched">
+                        <small *ngIf="Destination.errors.required">
+                            Destrination is required
+                        </small>
+                    </div>
+                </div>
+    
+                    
+                <div class="form-group">
+    
+                    <label for="DepartureTime">Departure:</label>
+                    <input type="time" id="dept" name="DepartureTime" formControlName="DepartureTime">
+    
+                </div>
+    
+                <div class="form-group">
+                    <label for="ArrivalTime">ArrivalTime:</label>
+                    <input type="time" id="ArrivalTime" name="ArrivalTime" formControlName="ArrivalTime">
+    
+                </div>
+    
+                <div class="form-group">
+                    <label for="Duration">
+                        Duration
+                    </label>
+                    <input type="text" class="form-control" formControlName="Duration" required>
+    
+                    <div class="alert alert-danger" *ngIf="Duration.errors && Duration.touched">
+                        <small *ngIf="Duration.errors.required">
+                            Duration is required
+                        </small></div>
+                </div>
+    
+                <div class="form-group">  
+                    <label for="FlightDate">
+                        LaunchDate
+                    </label>
+                    <input type="date" name="FlightDate" data-placeholder="LaunchDate" class="form-control" formControlName="FlightDate"  formControlName="DOB" min="{{date | date:'yyyy-MM-dd'}}" max="2022-01-01" required><br>
+                      <div class="alert alert-danger" *ngIf="FlightDate.errors && FlightDate.touched">
+                        <small *ngIf="FlightDate.errors.required">
+                          LaunchDate is required
+                        </small>  
+                      </div>
+                </div>
+    
+                <div class="form-group">
+                    <label for="NoOfSeats">
+                        Number Of Seats
+                    </label>
+                    <input type="text" class="form-control" formControlName="NoOfSeats" required>
+    
+                    <div class="alert alert-danger" *ngIf="NoOfSeats.errors && NoOfSeats.touched">
+                        <small *ngIf="NoOfSeats.errors.required">
+                            No of seats is required
+                        </small>
+                    </div>
+                </div>
+                
+                
+                
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Add</button>&nbsp;&nbsp;
+                    
+                </div>
+    
+                <div class="text-danger">{{Error}}</div>
+            </form>
+        </div>
+    </div>

@@ -1,0 +1,335 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Card-->
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+      <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+              <a href="#" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+              <a class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+             <!-- <a href="#" class="nav-item nav-link">View Booking Details</a>-->
+              <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+              <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+          </div>
+      </div>
+  </div>    
+</nav>
+<br><br>
+    <form [formGroup]="myForm" (ngSubmit)="submit()">
+    <ol class="cabin fuselage">
+      <li class="row row--1">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="01A" (change)="onCheckboxChange($event,'01A')"  />
+            <label for="01A">01A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="01B" (change)="onCheckboxChange($event,'01B')"  />
+            <label for="01B">01B</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox"  id="01C" (change)="onCheckboxChange($event,'01C')" />
+            <label for="01C">01C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="01D" (change)="onCheckboxChange($event,'01D')" />
+            <label for="01D">01D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="01E" (change)="onCheckboxChange($event,'01E')" />
+            <label for="01E">01E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--2">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="02A" (change)="onCheckboxChange($event,'02A')"/>
+            <label for="02A">02A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="02B" (change)="onCheckboxChange($event,'02B')" />
+            <label for="02B">02B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="02C" (change)="onCheckboxChange($event,'02C')" />
+            <label for="02C">02C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="02D" (change)="onCheckboxChange($event,'02D')" />
+            <label for="02D">02D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="02E" (change)="onCheckboxChange($event,'02E')" />
+            <label for="02E">02E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--3">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="03A" (change)="onCheckboxChange($event,'03A')" />
+            <label for="03A">03A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="03B" (change)="onCheckboxChange($event,'03B')" />
+            <label for="03B">03B</label>
+          </li>
+          
+          <li class="seat">
+            <input type="checkbox" id="03C" (change)="onCheckboxChange($event,'03C')"/>
+            <label for="03C">03C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="03D" (change)="onCheckboxChange($event,'03D')" />
+            <label for="03D">03D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="03E" (change)="onCheckboxChange($event,'03E')"/>
+            <label for="03E">03E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--4">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="04A" (change)="onCheckboxChange($event,'04A')"/>
+            <label for="04A">04A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="04B" (change)="onCheckboxChange($event,'04B')"/>
+            <label for="04B">04B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="04C" (change)="onCheckboxChange($event,'04C')"/>
+            <label for="04C">04C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="04D" (change)="onCheckboxChange($event,'04D')"/>
+            <label for="04D">04D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="04E" (change)="onCheckboxChange($event,'04E')"/>
+            <label for="04E">04E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--5">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="05A" (change)="onCheckboxChange($event,'05A')" />
+            <label for="05A">05A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="05B" (change)="onCheckboxChange($event,'05B')"/>
+            <label for="05B">05B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="05C" (change)="onCheckboxChange($event,'05C')" />
+            <label for="05C">05C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="05D" (change)="onCheckboxChange($event,'05D')"/>
+            <label for="05D">05D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="05E" (change)="onCheckboxChange($event,'05E')" />
+            <label for="05E">05E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--6">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="06A" (change)="onCheckboxChange($event,'06A')" />
+            <label for="06A">06A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="06B" (change)="onCheckboxChange($event,'06B')" />
+            <label for="06B">06B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="06C" (change)="onCheckboxChange($event,'06C')"/>
+            <label for="06C">06C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="06D" (change)="onCheckboxChange($event,'06D')"/>
+            <label for="06D">06D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="06E" (change)="onCheckboxChange($event,'06E')"/>
+            <label for="06E">06E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--7">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="07A" (change)="onCheckboxChange($event,'07A')"/>
+            <label for="07A">07A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="07B" (change)="onCheckboxChange($event,'07B')"/>
+            <label for="07B">07B</label>
+          </li>
+          
+          <li class="seat">
+            <input type="checkbox" id="07C" (change)="onCheckboxChange($event,'07C')"/>
+            <label for="07C">07C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="07D" (change)="onCheckboxChange($event,'07D')"/>
+            <label for="07D">07D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="07E" (change)="onCheckboxChange($event,'07E')"/>
+            <label for="07E">07E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--8">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="08A" (change)="onCheckboxChange($event,'08A')"/>
+            <label for="08A">08A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="08B" (change)="onCheckboxChange($event,'08B')"/>
+            <label for="08B">08B</label>
+          </li>
+          
+          <li class="seat">
+            <input type="checkbox" id="08C" (change)="onCheckboxChange($event,'08C')"/>
+            <label for="08C">08C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="08D" (change)="onCheckboxChange($event,'08D')"/>
+            <label for="08D">08D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="08E" (change)="onCheckboxChange($event,'08E')"/>
+            <label for="08E">08E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--9">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="09A" (change)="onCheckboxChange($event,'09A')" />
+            <label for="09A">09A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="09B" (change)="onCheckboxChange($event,'09B')"/>
+            <label for="09B">09B</label>
+          </li>
+          
+          <li class="seat">
+            <input type="checkbox" id="09C" (change)="onCheckboxChange($event,'09C')"/>
+            <label for="09C">09C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="09D" (change)="onCheckboxChange($event,'09D')"/>
+            <label for="09D">09D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="09E" (change)="onCheckboxChange($event,'09E')"/>
+            <label for="09E">09E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--10">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="10A" (change)="onCheckboxChange($event,'10A')"/>
+            <label for="10A">10A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="10B" (change)="onCheckboxChange($event,'10B')"/>
+            <label for="10B">10B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="10C" (change)="onCheckboxChange($event,'10C')"/>
+            <label for="10C">10C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="10D" (change)="onCheckboxChange($event,'10D')"/>
+            <label for="10D">10D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="10E" (change)="onCheckboxChange($event,'10E')"/>
+            <label for="10E">10E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--11">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="11A" (change)="onCheckboxChange($event,'11A')"/>
+            <label for="11A">11A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="11B" (change)="onCheckboxChange($event,'11B')"/>
+            <label for="11B">11B</label>
+          </li>
+         
+          <li class="seat">
+            <input type="checkbox" id="11C" (change)="onCheckboxChange($event,'11C')"/>
+            <label for="11C">11C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="11D" (change)="onCheckboxChange($event,'11D')"/>
+            <label for="11D">11D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="11E" (change)="onCheckboxChange($event,'11E')"/>
+            <label for="11E">11E</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--12">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input type="checkbox" id="12A" (change)="onCheckboxChange($event,'12A')"/>
+            <label for="12A">12A</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="12B" (change)="onCheckboxChange($event,'12B')"/>
+            <label for="12B">12B</label>
+          </li>
+        
+          <li class="seat">
+            <input type="checkbox" id="12C" (change)="onCheckboxChange($event,'12C')"/>
+            <label for="12C">12C</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="12D" (change)="onCheckboxChange($event,'12D')"/>
+            <label for="12D">12D</label>
+          </li>
+          <li class="seat">
+            <input type="checkbox" id="12E" (change)="onCheckboxChange($event,'12E')"/>
+            <label for="12E">12E</label>
+          </li>
+        </ol>
+      </li>
+      
+    </ol>
+  </form>
+    <div class="form-group">
+      <button class="btn btn-success" style="margin-left: 50%;" (click)="seat()" >BOOK</button>&nbsp;
+  </div>

@@ -1,0 +1,42 @@
+<body>
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+        <a href="#" class="navbar-brand mr-3" routerLink="/admin-home">Flight Reservation</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="#" class="nav-item nav-link active" routerLink="/admin-home">Home</a>
+                <!--<a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                <a href="#" class="nav-item nav-link">View Booking Details</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>-->
+                <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                <a href="#" class="nav-item nav-link" routerLink="/deleteflight">Delete Flight</a>
+            </div>
+            <div class="navbar-nav ml-auto">
+                <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+            </div>
+        </div>
+    </div>    
+</nav>
+<div id="full" style="width: 1500px; margin: 0;padding-left: -10px;left: 0px;">
+    <div id="sky" style="width: 100%; margin: 0 ">
+        <div id="cloud1" class="cloud"></div>
+        <div id="cloud2" class="cloud"></div>
+        <div id="cloud3" class="cloud"></div>
+        <div id="cloud4" class="cloud"></div>
+        <div id="cloud5" class="cloud"></div>
+        <div id="cloud6" class="cloud"></div>
+        <div id="cloud7" class="cloud"></div>
+        <div id="aeroplane"></div>
+     </div>
+    </div>
+    <div style="text-align: center;">
+        <h1>Welcome to Flight Reservation System</h1>
+        <h2>Aapka Hardik Swaagat Hai!!!!</h2>
+        <h3>Please Click on the book ticket to book your tickets!!!!</h3>
+  </div>
+</body>

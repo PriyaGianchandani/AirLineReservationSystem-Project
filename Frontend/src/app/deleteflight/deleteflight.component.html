@@ -1,0 +1,53 @@
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+<a href="#" class="navbar-brand mr-3" routerLink="/admin-home">Flight Reservation</a>
+<button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarCollapse">
+    <div class="navbar-nav">
+        <a href="#" class="nav-item nav-link active" routerLink="/admin-home">Home</a>
+        <!--<a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+        <a href="#" class="nav-item nav-link">View Booking Details</a>
+        <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>-->
+        <a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+        <a href="#" class="nav-item nav-link" routerLink="/deleteflight">Delete Flight</a>
+    </div>
+    <div class="navbar-nav ml-auto">
+        <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+        <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+        <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+    </div>
+</div>
+</div>    
+</nav><br><br>
+<div class="card-footer">  
+    <div class="col-lg-12 table-responsive">  
+        <table class="table table-striped">  
+            <thead>  
+                <tr>  
+                    <th>FlightId</th>  
+                    <th>Source</th>  
+                    <th>Destination</th>  
+                    <th>DepartureTime</th>  
+                    <th>ArrivalTime</th> 
+                    <th>FlightDate</th>  
+                    <th></th>  
+                </tr>  
+            </thead>  
+            <tbody>  
+                <tr *ngFor="let f of allFlights">  
+                    <td>{{f.FlightID}}</td>  
+                    <td>{{f.SourceFlight}}</td>  
+                    <td>{{f.Destination}}</td>  
+                    <td>{{f.DepartureTime}}</td>  
+                    <td>{{f.ArrivalTime}}</td>
+                    <td>{{f.FlightDate}}</td>  
+                    <td>  
+                        <button type="button" class="btn btn-danger mr-1" (click)="DeleteStudent(f.FlightID)">Delete</button>  
+                    </td>  
+                </tr>  
+            </tbody>  
+        </table>  
+    </div>  
+</div>

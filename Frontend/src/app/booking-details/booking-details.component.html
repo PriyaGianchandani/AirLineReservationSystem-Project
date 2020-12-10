@@ -1,0 +1,154 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Card-->
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+      <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+              <a href="#" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+              <a class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+              <!--<a href="#" class="nav-item nav-link">View Booking Details</a>-->
+              <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+              <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+          </div>
+      </div>
+  </div>    
+</nav>
+
+<div class="container">
+    <div class="jumbotron">
+        <div class="display-4">
+            Confirm Booking Details based on your Selection!!!
+        </div>
+        <hr class="my-4">
+        <form [formGroup]="PassengerForm" (ngSubmit)= "onFormSubmit()">
+         
+            <div class="form-group">
+                <label for="FlightID">
+                    FlightID
+                </label>
+                    <select formControlName="FlightID" class="form-control">
+                        <option>Select FlightID</option>
+                        <option>{{fid}}</option>
+                    </select>    
+                </div>
+            <div class="form-group">
+                <label for="Email">
+                    Email
+                </label>
+                <select formControlName="Email" class="form-control">
+                    <option>Select Email-ID</option>
+                    <option>{{mail}}</option>
+                </select> 
+            </div>
+
+            <div class="form-group">
+                <label for="ClassID">
+                    ClassID
+                </label>
+                <select formControlName="ClassID" class="form-control">
+                    <option>Select ClassID</option>
+                    <option>{{cid}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="ClassID">
+                    Class Details
+                </label>
+                <select formControlName="ClassDetails" class="form-control">
+                    <option>Select Class Details</option>
+                    <option>{{cdetails}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">  
+                <label for="BookingDate">
+                    BookingDate
+                </label>
+                <select formControlName="BookingDate" class="form-control">
+                    <option>Select Class Details</option>
+                    <option>{{currentdate}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="NoOfTickets">
+                    NoOfTickets
+                </label>
+                <select formControlName="NoOfTickets" class="form-control">
+                    <option>Select Class Details</option>
+                    <option>{{totaltickets}}</option>
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <label for="BookingAmount">
+                    BookingAmount
+                </label>
+                <select formControlName="BookingAmount" class="form-control">
+                    <option>Select Class Details</option>
+                    <option>{{totalamount}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">  
+                <label for="DateOfDeparture">
+                    DateOfDeparture
+                </label>
+                <input type="date" name="DateOfDeparture" data-placeholder="DateOfDeparture" class="form-control" formControlName="DateOfDeparture" min="{{date | date:'yyyy-MM-dd'}}" max="2022-01-01" required><br>
+                  <div class="alert alert-danger" *ngIf="DateOfDeparture.errors && DateOfDeparture.touched">
+                    <small *ngIf="DateOfDeparture.errors.required">
+                        DateOfDeparture is required
+                    </small>  
+                  </div>
+            </div>
+
+
+          <!--  <div class="form-group">  
+                <label for="ReturnDate">
+                    ReturnDate
+                </label>
+                <input type="date" name="ReturnDate" data-placeholder="ReturnDate" class="form-control" formControlName="ReturnDate" required><br>
+                  <div class="alert alert-danger" *ngIf="ReturnDate.errors && ReturnDate.touched">
+                    <small *ngIf="ReturnDate.errors.required">
+                        ReturnDate is required
+                    </small>  
+                  </div>
+            </div>
+
+            <div class="form-group">
+                <label for="ReturnTicket">
+                    ReturnTicket
+                </label>
+                <input type="text" class="form-control" formControlName="ReturnTicket" required>
+
+                <div class="alert alert-danger" *ngIf="ReturnTicket.errors && ReturnTicket.touched">
+                    <small *ngIf="ReturnTicket.errors.required">
+                        ReturnTicket is required
+                    </small>
+                </div>
+            </div>-->
+            
+            
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Confirm</button>&nbsp;&nbsp;
+                
+            </div>
+
+            <div class="text-danger">{{err}}</div>
+        </form>
+    </div>
+</div>

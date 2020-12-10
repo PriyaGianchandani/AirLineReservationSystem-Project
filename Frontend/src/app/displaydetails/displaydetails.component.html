@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Card-->
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+      <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+              <a href="#" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+              <!--<a href="#" class="nav-item nav-link">View Booking Details</a>-->
+              <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+              <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+          </div>
+      </div>
+  </div>    
+</nav>
+
+<div class="container">
+    <div class="jumbotron">
+
+        <form [formGroup]="DisplayDetails">
+            <div class="form-group">
+                <label for="NoOfTickets">
+                    Enter No Of tickets to be booked
+                </label>
+                <input type="number" min=1 class="form-control" formControlName="NoOfTickets" required>
+
+                <div class="alert alert-danger" *ngIf="NoOfTickets.errors && NoOfTickets.touched">
+                    <small *ngIf="NoOfTickets.errors.required">
+                        No Of Tickets is required
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="SelectClass">Select Class</label>
+                <select formControlName="SelectClass" class="form-control">
+                   
+                    <option>Choose Class</option>
+                    <option>Business Class</option>
+                    <option>Economy Class</option>
+                </select>    
+            </div>
+
+            <button class="btn btn-success" (click)="SetNoOfTickets()">Display Cost</button>&nbsp;&nbsp;
+
+
+            <div class="form-group">
+                <label for="Cost"> Individual Cost</label>
+                <input type="text" class="form-control" formControlName="Cost" *ngIf="Economy" value= "{{EconomyCost}}">
+                <input type="text" class="form-control" formControlName="Cost" *ngIf="!Economy" value= "{{BusinessCost}}">
+
+
+                <div class="alert alert-danger" *ngIf="Cost.errors && Cost.touched">
+                    <small *ngIf="Cost.errors.required">
+                         Cost is required
+                    </small>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="TotalCost">Total Cost</label>
+                <select formControlName="TotalCost" class="form-control" *ngIf="Economy">
+                    <option>Select Cost</option>
+                    <option>{{EconomyCost*NumberOftickets}}</option>
+                </select>
+                <select formControlName="TotalCost" class="form-control" *ngIf="!Economy">
+                    <option>Select Cost</option>
+                    <option>{{BusinessCost*NumberOftickets}}</option>
+                </select>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-success" (click)="onFormSubmit()">Submit</button>&nbsp;&nbsp;
+                <button class="btn btn-success" (click)="btnClick()">Decline</button>&nbsp;&nbsp;
+
+            </div>
+
+            <div class="text-danger">{{err}}</div>
+        </form>
+    </div>
+</div>

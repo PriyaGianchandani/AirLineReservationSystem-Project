@@ -1,0 +1,47 @@
+<div class="container">
+  <!-- <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+       <div class="container">-->
+           <nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+               <div class="container" style="max-width: 100%; margin: 0;">
+           <a href="#" class="navbar-brand mr-3" routerLink="/home">Flight Reservation</a>
+           <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+               <span class="navbar-toggler-icon"></span>
+           </button>
+           <div class="collapse navbar-collapse" id="navbarCollapse">
+               <div class="navbar-nav">
+                   <a href="#" class="nav-item nav-link active" routerLink="/home">Home</a>
+                   <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+                   <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+               </div>
+               <div class="navbar-nav ml-auto">
+                   <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                   <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+               </div>
+           </div>
+       </div>    
+   </nav>
+<div class="container">
+    <div class="jumbotron">
+      <div class="display-4" style="text-align: center;" >
+        
+      </div><br>
+      
+      <form [formGroup]="CancelBookingForm" (ngSubmit)="EnterCancel()">  
+        <div class="input-group mb-3">      
+          <input type="number"  class="form-control" placeholder="Enter Your Booking ID To Cancel Your Booking" name="BookingId" formControlName="BookingId" required>
+            <div class="alert alert-danger" *ngIf="BookingId.errors && BookingId.touched">
+              <small *ngIf="BookingId.errors.required">
+                BookingId is required
+              </small> 
+            </div>&nbsp;&nbsp;
+          </div>                 
+              <button type="submit" class="btn btn-danger mr-1">Cancel Booking </button> 
+              <h1 *ngIf="val">{{massage}}</h1>
+    </form>
+  </div>    
+</div>

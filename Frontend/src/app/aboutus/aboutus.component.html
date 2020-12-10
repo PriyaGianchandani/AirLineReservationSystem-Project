@@ -1,0 +1,96 @@
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<header>
+</header>
+<main>
+    <nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+        <div class="container" style="max-width: 100%; margin: 0;">
+            <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="#" class="nav-item nav-link active">Home</a>
+                    <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+                    <a class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+                    <!--<a href="#" class="nav-item nav-link">View Booking Details</a>-->
+                    <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+                    <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>-->
+                </div>
+                <div class="navbar-nav ml-auto">
+                    
+                    <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+                    <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+                </div>
+            </div>
+        </div>    
+    </nav>
+    <br>
+<br>
+<br>
+    <div class="about">
+        <div class="title">
+           <b> <h1>About The Company</h1></b>
+        </div>
+        <div class="desc">
+            
+            <p>PUNS Airways connects the world to, and through, our global hub in India. We operate modern, efficient
+                and comfortable aircraft, and our culturally diverse workforce delivers award-winning services to our
+                customers across six continents every day. PUNS  Airways is India’s largest passenger airline with a
+                market share of 59.4% as of August, 2020. We primarily operate in India’s domestic air travel market as
+                a low-cost carrier with focus on our three pillars – offering low fares, being on-time and delivering a
+                courteous and hassle-free experience. PUNS has become synonymous with being on-time.
+                <br>
+                <br>
+                Since our inception in August 2006, we have grown from a carrier with one plane to a fleet of 280
+                aircraft today. A uniform fleet for each type of operation, high operational reliability and an award
+                winning service make us one of the most reliable airlines in the world.PUNS has a total destination
+                count of 63. This includes two destinations: Aizawl and Agra in India which are open for sale. </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card">
+            <div class="card_img"> <i class="fab fa-avianex"></i> </div>
+            <div class="card_title">Facts and Figures</div>
+            <div class="card_body">
+                <p>10 consecutive years of Profitable operations
+                    Market share of 59.4% as of August, 2020.
+                    Fleet of 280 aircraft including 115 new generation A320 NEOs, 117 A320 CEOs, 25 ATRs and 23 A321 NEO.
+                    Recognized as ‘Great Place to Work for in India’ for 8 years in a row (2008- 2015)
+                    Named as Aon’s Best Employer for the year 2016 and 2017
+                    1500 Daily flights
+                    63 Domestic Destinations
+                    300+ Million happy customers
+                    280 Fleet tall</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_img"> <i class="fas fa-smile"></i> </div>
+            <div class="card_title">Contact Us</div>
+            <div class="card_body">
+                <p>Email us with any questions or queries and call us on 518-387-9327.We would be happy to serve you and answer your queries.<br>
+
+                    Fax : +91 11-43513200<br>
+        
+                    To share your feedback/complaints/suggestions or to reach out to our Customer Relations Team.<br>
+        
+                    Your questions and feedbacks are important to us.<br>
+        
+                    nisargvirvadia@gmail.com , priyagianchandani@gmail.com <br>
+        
+                    susansunny@gmail.com , uditbhatia@gmail.com<br></p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card_img"> <i class="fas fa-user-astronaut"></i> </div>
+            <div class="card_title">WHY BOOK WITH US?</div>
+            <div class="card_body">
+                <p>PUNS is not only the most efficient low fare operator domestically but is also comparable with global low cost airlines. We are constantly enhancing our engagement with our passengers to augment their travel experience. From multichannel direct sales (including online flight booking, call centers and airport counters), to online flight status checking we have transformed air travel in India. Today, we are India’s most preferred airline. At PUNS, low fares come with high quality.</p>
+            </div>
+        </div>
+    </div>
+   
+</main>

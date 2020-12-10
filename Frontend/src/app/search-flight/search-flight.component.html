@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--Card-->
+<nav class="navbar navbar-dark py-0 bg-dark navbar-expand-lg fixed-top">
+    <div class="container" style="max-width: 100%; margin: 0;">
+      <a href="#" class="navbar-brand mr-3">Flight Reservation</a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav">
+              <a href="#" class="nav-item nav-link active">Home</a>
+              <a class="nav-item nav-link" routerLink="/search-flight">Book Ticket</a>
+              <a class="nav-item nav-link" routerLink="/cancel-flight">Cancel Ticket</a>
+             <!-- <a href="#" class="nav-item nav-link">View Booking Details</a>-->
+              <a href="#" class="nav-item nav-link" routerLink="/Aboutus">AboutUs</a>
+              <!--<a href="#" class="nav-item nav-link" routerLink="/add-flight">Add Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">View Flight</a>
+              <a href="#" class="nav-item nav-link" routerLink="/ViewFlight">Delete Flight</a>-->
+          </div>
+          <div class="navbar-nav ml-auto">
+              <a href="#" class="nav-item nav-link" routerLink="/register" *ngIf="!login">Register</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" !login">Login</a>
+              <a href="#" class="nav-item nav-link" routerLink="/Login"*ngIf=" login" (click)=logout()>Logout</a>
+          </div>
+      </div>
+  </div>    
+</nav><br><br>
+<form #addClientForm="ngForm" (ngSubmit)="searchdata()" novalidate>  
+    <div class="card shadow mb-5 bg-white rounded" >
+        <!--Card-Body-->
+        <div class="card-body">
+            <!--Card-Title-->
+            <p class="card-title text-center shadow mb-5 rounded">Search Flights</p>
+            <div class="icons text-center">
+                <i class="fa fa-plane fa-2x" aria-hidden="true"></i>
+           </div>
+            <hr>
+            <p class="searchText"><strong >Search For Flights</strong ></p>
+            <!--First Row-->
+            <!--<div class="row mb-4 mt-4"> <label class="radiobtn"><input type="radio" name="gender" value="male">One Way</label> <label class="radiobtn"><input type="radio" name="gender" value="male">Round Trip</label></div>-->
+            <!--Second Row-->
+            <div class="row">
+                <div class="col-sm-5"> 
+                    <input id="select" type="text" #SourceFlight="ngModel" name="SourceFlight"  [(ngModel)]="model.SourceFlight"   
+                    placeholder="Source"> 
+                </div>
+             <div class="col-sm-4"> 
+                    <input  type="text" #Destination="ngModel" name="Destination"  [(ngModel)]="model.Destination"   
+                    placeholder="Destination">
+                </div>   
+            </div>
+           <br>
+            <!--<div class="row mb-3">
+               <div class="col-sm-6"> <input placeholder="&#xf073; Departing" type="date" id="date-picker-example" class="form-control datepicker mb-4" style="font-family:Arial, FontAwesome"> </div>-->
+            <!--<div class="col-sm-6"> <input placeholder="&#xf073; Arriving" type="date" id="date-picker-example" class="form-control datepicker" style="font-family:Arial, FontAwesome"> </div> 
+            </div>-->
+
+            <div class="row mb-3">
+                <div class="col-sm-6"> <input placeholder="&#xf073; Departing" type="date" id="date-picker-example" class="form-control datepicker mb-4" min="{{date | date:'yyyy-MM-dd'}}" max="2022-01-01"  style="font-family:Arial, FontAwesome"> </div>
+                <!--<div class="col-sm-6"> <input placeholder="&#xf073; Arriving" type="date" id="date-picker-example" class="form-control datepicker" min="{{date | date:'yyyy-MM-dd'}}" max="2022-01-01" style="font-family:Arial, FontAwesome"> </div>-->
+             </div>
+
+       <!--<div class="row mb-3">
+                <div class="col-sm-6"> 
+                    <input placeholder="Number of Tickets" type="text" >    
+                </div>
+            </div>-->
+
+            <div class="col-sm-3 form-group" style="padding-left: 40%;"> 
+                <button type="submit" class="btn btn-success" >Search</button>
+            </div>     
+        </div>
+    </div>
+    </form>
+<table class="table" >  
+    <thead class="thead-dark">  
+      <tr>  
+        <th scope="col">Flight ID</th>
+        <th scope="col">Source</th>  
+        <th scope="col">Destination</th>  
+        <th scope="col">ArrivalTime</th>  
+        <th scope="col">DepartureTime</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Available Tickets</th>
+        <th scope="col">Book</th>
+      </tr>  
+    </thead>  
+    <tbody *ngFor="let f of flight">  
+      <tr> 
+        <td>{{f.FlightID}}</td>
+        <td>{{f.SourceFlight}}</td>  
+        <td>{{f.Destination}}</td>  
+        <td>{{f.ArrivalTime}}</td>  
+        <td>{{f.DepartureTime}}</td>
+        <td>{{f.Duration}}</td>
+        <td>{{f.SeatAvailability}}</td>
+        <td><button type="submit" class="btn btn-success" (click)="btnDisplayDetails(f.FlightID)">Book</button></td>
+      </tr>  
+    </tbody>  
+  </table>
