@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FRSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Booking">
+    <Key>
+      <PropertyRef Name="BookingID" />
+    </Key>
+    <Property Name="BookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FlightID" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="BookingDate" Type="date" Nullable="false" />
+    <Property Name="NoofTickets" Type="int" Nullable="false" />
+    <Property Name="BookingAmount" Type="int" Nullable="false" />
+    <Property Name="DateOfDeparture" Type="date" Nullable="false" />
+    <Property Name="ReturnDate" Type="date" />
+    <Property Name="ReturnTicket" Type="bit" />
+    <Property Name="ClassDetails" Type="nvarchar" MaxLength="30" />
+    <Property Name="Del" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cancellations">
+    <Key>
+      <PropertyRef Name="CancellationID" />
+    </Key>
+    <Property Name="CancellationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CancellationDate" Type="date" Nullable="false" />
+    <Property Name="FlightID" Type="int" Nullable="false" />
+    <Property Name="RefundAmount" Type="int" Nullable="false" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Class">
+    <Key>
+      <PropertyRef Name="ClassID" />
+    </Key>
+    <Property Name="ClassID" Type="int" Nullable="false" />
+    <Property Name="FlightID" Type="int" Nullable="false" />
+    <Property Name="BusinessCost" Type="int" Nullable="false" />
+    <Property Name="NoOfBusinessSeats" Type="int" Nullable="false" />
+    <Property Name="EconomyCost" Type="int" Nullable="false" />
+    <Property Name="NoOfEconomySeats" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="FlightID" />
+    </Key>
+    <Property Name="FlightID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SourceFlight" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Destination" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ArrivalTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="DepartureTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="NoOfSeats" Type="int" Nullable="false" />
+    <Property Name="FlightDate" Type="date" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Del" Type="int" Nullable="false" />
+    <Property Name="SeatAvailability" Type="int" />
+  </EntityType>
+  <EntityType Name="Passengers">
+    <Key>
+      <PropertyRef Name="PassengerID" />
+    </Key>
+    <Property Name="PassengerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SeatID" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="RegisteredUsers">
+    <Key>
+      <PropertyRef Name="Email" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="ContactNo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK__Booking__ClassID__4E88ABD4">
+    <End Role="Class" Type="Self.Class" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Class">
+        <PropertyRef Name="ClassID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="ClassID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__Email__4D94879B">
+    <End Role="RegisteredUsers" Type="Self.RegisteredUsers" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisteredUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Booking__FlightI__4CA06362">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Booking">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cancellat__Booki__2EDAF651">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Cancellations" Type="Self.Cancellations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Cancellations">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cancellat__Fligh__2DE6D218">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Cancellations" Type="Self.Cancellations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Cancellations">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Class__FlightID__45F365D3">
+    <End Role="Flight" Type="Self.Flight" Multiplicity="1" />
+    <End Role="Class" Type="Self.Class" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Flight">
+        <PropertyRef Name="FlightID" />
+      </Principal>
+      <Dependent Role="Class">
+        <PropertyRef Name="FlightID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Passenger__Booki__04E4BC85">
+    <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+    <End Role="Passengers" Type="Self.Passengers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Booking">
+        <PropertyRef Name="BookingID" />
+      </Principal>
+      <Dependent Role="Passengers">
+        <PropertyRef Name="BookingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Passenger__Email__05D8E0BE">
+    <End Role="RegisteredUsers" Type="Self.RegisteredUsers" Multiplicity="1" />
+    <End Role="Passengers" Type="Self.Passengers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RegisteredUsers">
+        <PropertyRef Name="Email" />
+      </Principal>
+      <Dependent Role="Passengers">
+        <PropertyRef Name="Email" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="proc_finalflightsearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SourceFlight" Type="varchar" Mode="In" />
+    <Parameter Name="Destination" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="proc_flightsearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SourceFlight" Type="varchar" Mode="In" />
+    <Parameter Name="Destination" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="proc_searchflight" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SourceFlight" Type="varchar" Mode="In" />
+    <Parameter Name="Destination" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="FRSModelStoreContainer">
+    <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cancellations" EntityType="Self.Cancellations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Passengers" EntityType="Self.Passengers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegisteredUsers" EntityType="Self.RegisteredUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Booking__ClassID__4E88ABD4" Association="Self.FK__Booking__ClassID__4E88ABD4">
+      <End Role="Class" EntitySet="Class" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__Email__4D94879B" Association="Self.FK__Booking__Email__4D94879B">
+      <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Booking__FlightI__4CA06362" Association="Self.FK__Booking__FlightI__4CA06362">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="Booking" EntitySet="Booking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cancellat__Booki__2EDAF651" Association="Self.FK__Cancellat__Booki__2EDAF651">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Cancellations" EntitySet="Cancellations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cancellat__Fligh__2DE6D218" Association="Self.FK__Cancellat__Fligh__2DE6D218">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="Cancellations" EntitySet="Cancellations" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Class__FlightID__45F365D3" Association="Self.FK__Class__FlightID__45F365D3">
+      <End Role="Flight" EntitySet="Flight" />
+      <End Role="Class" EntitySet="Class" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Passenger__Booki__04E4BC85" Association="Self.FK__Passenger__Booki__04E4BC85">
+      <End Role="Booking" EntitySet="Booking" />
+      <End Role="Passengers" EntitySet="Passengers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Passenger__Email__05D8E0BE" Association="Self.FK__Passenger__Email__05D8E0BE">
+      <End Role="RegisteredUsers" EntitySet="RegisteredUsers" />
+      <End Role="Passengers" EntitySet="Passengers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

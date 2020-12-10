@@ -34,7 +34,7 @@ create table Passengers(PassengerID int Primary Key not null,
 						Email nvarchar(100) Foreign Key references Registeredusers(Email) not null)
 
 
-create table Cancellations(CancellationID int Primary Key not null,
+create table Cancellations(CancellationID int Primary Key not null identity(1,1),
 						   CancellationDate date not null,
 						   FlightID int Foreign Key references Flight(FlightID) not null,
 						   RefundAmount int not null,
@@ -122,7 +122,23 @@ BEGIN
 select * from Flight where SourceFlight=@SourceFlight AND Destination=@Destination
 END
 
-exec proc_searchflight @SourceFlight='Mumbai',@Destination='Delhi'
+CREATE PROCEDURE proc_flightsearch 
+@SourceFlight varchar(50),
+@Destination varchar(50)
+AS
+BEGIN
+select * from Flight where SourceFlight=@SourceFlight AND Destination=@Destination
+END     Creating new procedure
+
+CREATE PROCEDURE proc_finalflightsearch 
+@SourceFlight varchar(50),
+@Destination varchar(50)
+AS
+BEGIN
+select * from Flight where SourceFlight=@SourceFlight AND Destination=@Destination AND Del=1
+END
+
+exec proc_finalflightsearch @SourceFlight='Mumbai',@Destination='Delhi'
 
 
 
@@ -236,21 +252,98 @@ select * from Passengers
 Alter table Booking Drop column SeatID
 
 sp_help booking
-Alter table Booking drop constraint fk_SeatID
+Alter table Booking drop constraint FK__Booking__SeatID__4F7CD00D
 
 Drop table Seat 
 
 select * from Flight
 Alter table Flight add Del int not null default 1
 
+select * from Seat
+
+Drop table Passengers
+
+create table Passengers(PassengerID int Primary Key Identity(1,1) not null,
+						FirstName nvarchar(50) not null,
+						LastName nvarchar(50) not null,
+						Age int not null,
+						BookingID int Foreign Key references Booking(BookingID) not null,
+						Email nvarchar(100) Foreign Key references Registeredusers(Email) not null,
+						SeatID nvarchar(50) Foreign Key references Seat(SeatID) not null)
+
+select * from Passengers
+
+alter table Booking
+Add ClassDetails nvarchar(30) 
+
+select * from Booking
+select * from Class
+
+select * from Flight
+
+alter table Flight
+Add SeatAvailability int 
+update  Flight set seatavailability=45 where FlightID=100
+
+select * from Booking
+
+select * from Class
+
+update Booking set ClassDetails='Business Class' where FlightID=100
+
+select * from Passengers
+select * from seat 
+
+alter table Seat
+drop constraint FK__Seat__FlightID__48CFD27E
+
+sp_help Passengers
+alter table Passengers
+drop constraint FK__Passenger__SeatI__06CD04F7
+
+drop table Seat
+
+update Flight set Del=0 where FlightID=103
+
+sp_help Passengers
+delete from Passengers 
+
+alter table Booking
+Drop column Del
+
+alter table Passengers add SeatID nvarchar(20)
+select * from Passengers
+
+alter table Booking
+add Del int default 1 not null
+
+select * from Booking
+
+sp_help Booking
 
 
+alter table Booking
+drop constraint DF__Booking__Del__2A164134
 
+sp_help Cancellations
 
+Alter table Cancellations
+drop column CancellationID 
 
+drop table Cancellations
+alter table Cancellations
+add CancellationID int identity(1,1)
 
+sp_help Cancellations
 
+select * from Passengers
+select * from Cancellations
 
+select * from Flight
 
+select * from RegisteredUsers
+ALTER TABLE Cancellations ADD CONSTRAINT PK_CancellationID PRIMARY KEY (CancellationID)
 
-					
+sp_help Cancellations
+
+ALTER TABLE Booking ALTER COLUMN ReturnTicket bit NULL
